@@ -1,0 +1,577 @@
+﻿@page "/report"
+
+<h3>Report</h3>
+
+<AuthorizeView>
+    <div onload="pageLoad()">
+        <header>
+            <span id="programTitle">Radiology Reporter</span>
+            <div id="hosHead">
+                <span id="hn"></span><br>
+                <span id="dn"></span><br>
+                <span id="rn"></span><br>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="main.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="help.html">Help</a></li>
+                    <li><a href="settings.html"><b>Settings</b></a></li>
+                    <!--<li id="print"><a href="print.html">Print</a></li>-->
+                </ul>
+            </nav>
+        </header>
+
+
+        <div id="patientInfo">
+
+            <table id="patientInfoTable">
+                <tr>
+                    <td><b>Name:</b></td>
+                    <td><input class="pi" name="Name"></td>
+                    <td><b>Birth Date:</b></td>
+                    <td><input class="pi" name="birthDate" type="date"></td>
+                    <td><b>Sex:</b></td>
+                    <td>
+                        <select class="pi" name="sex">
+                            <option value="Unknown">Unknown</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </td>
+                    <td><b>Nationality:</b></td>
+                    <td><input class="pi" name="nationality" list="countryList"></td>
+                </tr>
+                <tr>
+                    <td><b>hospital Code:</b></td>
+                    <td><input class="pi" name="hospitalCode" required="true"></td>
+                    <td><b>Order Code:</b></td>
+                    <td><input class="pi" name="orderCode"></td>
+                    <td><b>Exam Code</b></td>
+                    <td><input class="pi" name="examCode"></td>
+                    <td><b>Exam Date</b></td>
+                    <td><input type="date" class="pi" name="examDate"></td>
+                    <td><input type="text" class="pi" name="examTime"></td>
+                </tr>
+            </table>
+            <button id="moreButton">more..</button>
+            <div id="infoPanel" style="display:none">
+                <table additionalInfoTable>
+                    <tr>
+                        <td><b>Referring Physician:</b></td>
+                        <td><input class="pi" name="referal"></td>
+
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+        <div id="mainRaw">
+            <div id="sideBar">
+                <ul id="sideMenu">
+                    <li id="Mri" class="menuItem"><span>MRI</span></li>
+                    <li id="Ct" class="menuItem"><span>CT scan</span></li>
+                    <li id="Xray" class="menuItem"><span>Xray</span></li>
+                    <li id="Contrast" class="menuItem"><span>Contrast Studies</span></li>
+                    <li id="Us" class="menuItem"><span>Ultrasound</span></li>
+                    <!-- <li id="doppler" class="menuItem">Doppler</li>-->
+                </ul>
+            </div>
+
+            <div id="popUp">
+                <ul id="subMri" class="subMenu">
+                    <li><b>MRI</b></li>
+                    <li><a href='Templates/0000039.html' target='Report_Frame'>MR_Abdomen_Abscess</a></li>
+                    <li><a href='Templates/0000040.html' target='Report_Frame'>MR_Adrenal</a></li>
+                    <li><a href='Templates/0000041.html' target='Report_Frame'>MR_Ankle</a></li>
+                    <li><a href='Templates/0000043.html' target='Report_Frame'>MR_Bladder</a></li>
+                    <li><a href='Templates/0000044.html' target='Report_Frame'>MR_Brachial_Plexus</a></li>
+                    <li><a href='Templates/0000045.html' target='Report_Frame'>MR_Brain</a></li>
+                    <li><a href='Templates/0000047.html' target='Report_Frame'>Cardiac_MRI__Right_Heart_Failure</a></li>
+                    <li><a href='Templates/0000048.html' target='Report_Frame'>Cardiac_MRI__Adenosine_Stress_Protocol</a></li>
+                    <li><a href='Templates/0000049.html' target='Report_Frame'>Cardiac_MRI__Function_and_Viability</a></li>
+                    <li><a href='Templates/0000050.html' target='Report_Frame'>MR_Elbow</a></li>
+                    <li><a href='Templates/0000051.html' target='Report_Frame'>MR_Enterography</a></li>
+                    <li><a href='Templates/0000055.html' target='Report_Frame'>MR_Hip</a></li>
+                    <li><a href='Templates/0000056.html' target='Report_Frame'>MR_Infant_Hips</a></li>
+                    <li><a href='Templates/0000061.html' target='Report_Frame'>MR_Neck</a></li>
+                    <li><a href='Templates/0000062.html' target='Report_Frame'>MR_Neck_Angio</a></li>
+                    <li><a href='Templates/0000065.html' target='Report_Frame'>MR_Orbits</a></li>
+                    <li><a href='Templates/0000073.html' target='Report_Frame'>MR_Wrist</a></li>
+                    <li><a href='Templates/0000186.html' target='Report_Frame'>MR_Temporomandibular_Joint</a></li>
+                    <li><a href='Templates/0000240.html' target='Report_Frame'>MR_Rectal_Tumour</a></li>
+                    <li><a href='Templates/0000259.html' target='Report_Frame'>MR_Uterus</a></li>
+                    <li><a href='Templates/0000303.html' target='Report_Frame'>MR_Right_Knee</a></li>
+                    <li><a href='Templates/0000304.html' target='Report_Frame'>MR_Right_Shoulder</a></li>
+                </ul>
+                <ul id="subCt" class="subMenu">
+                    <li><a href='Templates/0000003.html' target='Report_Frame'>CT_Adrenal_Mass</a></li>
+                    <li><a href='Templates/0000004.html' target='Report_Frame'>CT_Brain</a></li>
+                    <li><a href='Templates/0000005.html' target='Report_Frame'>CT_Brain_Perfusion</a></li>
+                    <li><a href='Templates/0000006.html' target='Report_Frame'>CT_Appendicitis</a></li>
+                    <li><a href='Templates/0000007.html' target='Report_Frame'>CT_Calcium_Score</a></li>
+                    <li><a href='Templates/0000008.html' target='Report_Frame'>CT_Cardiac</a></li>
+                    <li><a href='Templates/0000009.html' target='Report_Frame'>CT_Cardiac_Bypass_Graft</a></li>
+                    <li><a href='Templates/0000010.html' target='Report_Frame'>CT_Enterography</a></li>
+                    <li><a href='Templates/0000011.html' target='Report_Frame'>CT_Liver_Surveillance</a></li>
+                    <li><a href='Templates/0000012.html' target='Report_Frame'>CT_Lung_Nodule</a></li>
+                    <li><a href='Templates/0000013.html' target='Report_Frame'>CT_Neck</a></li>
+                    <li><a href='Templates/0000014.html' target='Report_Frame'>CT_NeOp</a></li>
+                    <li><a href='Templates/0000015.html' target='Report_Frame'>CT_Oncoup</a></li>
+                    <li><a href='Templates/0000016.html' target='Report_Frame'>CT_Onco_Lung_Mass</a></li>
+                    <li><a href='Templates/0000017.html' target='Report_Frame'>CT_Onco_Primary_Liver_Mass</a></li>
+                    <li><a href='Templates/0000018.html' target='Report_Frame'>CT_Onco_Primary_Pancreas_Mass</a></li>
+                    <li><a href='Templates/0000019.html' target='Report_Frame'>CT_Onco_Renal_Mass</a></li>
+                    <li><a href='Templates/0000020.html' target='Report_Frame'>CT_Orbits</a></li>
+                    <li><a href='Templates/0000021.html' target='Report_Frame'>CT_Pancreas_Cyst</a></li>
+                    <li><a href='Templates/0000023.html' target='Report_Frame'>CT_Cervical_Spine</a></li>
+                    <li><a href='Templates/0000024.html' target='Report_Frame'>CT_Peds_Head</a></li>
+                    <li><a href='Templates/0000025.html' target='Report_Frame'>CT_Pulmonary_Veins</a></li>
+                    <li><a href='Templates/0000026.html' target='Report_Frame'>CT_Renal_Donor</a></li>
+                    <li><a href='Templates/0000027.html' target='Report_Frame'>CT_Renal_Mass</a></li>
+                    <li><a href='Templates/0000028.html' target='Report_Frame'>CT_Renal_Stone</a></li>
+                    <li><a href='Templates/0000029.html' target='Report_Frame'>CT_Sinuses</a></li>
+                    <li><a href='Templates/0000030.html' target='Report_Frame'>CT_Temporal_Bones</a></li>
+                    <li><a href='Templates/0000031.html' target='Report_Frame'>CT_Urogram</a></li>
+                    <li><a href='Templates/0000116.html' target='Report_Frame'>CT_Chest_Pulmonary_Embolism</a></li>
+                    <li><a href='Templates/0000135.html' target='Report_Frame'>CT_Pancreatic_Mass_Staging</a></li>
+                    <li><a href='Templates/0000181.html' target='Report_Frame'>CT_Facial_Bones</a></li>
+                    <li><a href='Templates/0000234.html' target='Report_Frame'>CT_Abdomen</a></li>
+                    <li><a href='Templates/0000235.html' target='Report_Frame'>CT_Pelvis</a></li>
+                    <li><a href='Templates/0000236.html' target='Report_Frame'>CT_Chest</a></li>
+                    <li><a href='Templates/0000237.html' target='Report_Frame'>CAbdomen</a></li>
+                    <li><a href='Templates/0000238.html' target='Report_Frame'>CPelvis</a></li>
+                    <li><a href='Templates/0000239.html' target='Report_Frame'>CT_Pelvis</a></li>
+                    <li><a href='Templates/0000268.html' target='Report_Frame'>CT_Lung_Cancer_Screening</a></li>
+                    <li><a href='Templates/0000281.html' target='Report_Frame'>CT_Adrenals_(wiout_Calculator)</a></li>
+                    <li><a href='Templates/0000285.html' target='Report_Frame'>CT.html' target='Report_Frame'>CT.html' target='Report_Frame'>Ankle_Xray</a></li>
+                    <li><a href='Templates/0000143.html' target='Report_Frame'>Bone_Survey</a></li>
+                    <li><a href='Templates/0000144.html' target='Report_Frame'>Ches_2_Views</a></li>
+                    <li><a href='Templates/0000145.html' target='Report_Frame'>Ches_Post.html' target='Report_Frame'>Foo_Normal</a></li>
+                    <li><a href='Templates/0000149.html' target='Report_Frame'>Han_Normal</a></li>
+                    <li><a href='Templates/0000150.html' target='Report_Frame'>Hi_Normal</a></li>
+                    <li><a href='Templates/0000151.html' target='Report_Frame'>Hi_Prosthesis</a></li>
+                    <li><a href='Templates/0000152.html' target='Report_Frame'>Kne_Normal</a></li>
+                    <li><a href='Templates/0000153.html' target='Report_Frame'>Kne_Prosthesis</a></li>
+                    <li><a href='Templates/0000154.html' target='Report_Frame'>Shoulder_Xray</a></li>
+                    <li><a href='Templates/0000155.html' target='Report_Frame'>Shoulde_Prosthesis</a></li>
+                    <li><a href='Templates/0000156.html' target='Report_Frame'>Lumbar_Spine_Xray</a></li>
+                    <li><a href='Templates/0000157.html' target='Report_Frame'>Wrist_Xray</a></li>
+                    <li><a href='Templates/0000099.html' target='Report_Frame'>Abdomen_Xray</a></li>
+                    <li><a href='Templates/0000100.html' target='Report_Frame'>Abdomen_Series</a></li>
+                    <li><a href='Templates/0000101.html' target='Report_Frame'>Bone_Age</a></li>
+                    <li><a href='Templates/0000102.html' target='Report_Frame'>Chest_Xray</a></li>
+                    <li><a href='Templates/0000103.html' target='Report_Frame'>Ches_PICC</a></li>
+                    <li><a href='Templates/0000104.html' target='Report_Frame'>Ches_TB_screening</a></li>
+                    <li><a href='Templates/0000220.html' target='Report_Frame'>Cervical_Spine</a></li>
+                    <li><a href='Templates/0000222.html' target='Report_Frame'>Cystogram</a></li>
+                    <li><a href='Templates/0000223.html' target='Report_Frame'>Lumbosacral_Spine</a></li>
+                    <li><a href='Templates/0000224.html' target='Report_Frame'>Pelvis</a></li>
+                    <li><a href='Templates/0000225.html' target='Report_Frame'>Shoulder</a></li>
+                    <li><a href='Templates/0000226.html' target='Report_Frame'>Skull_Xray</a></li>
+                    <li><a href='Templates/0000229.html' target='Report_Frame'>Orbits</a></li>
+                    <li><a href='Templates/0000180.html' target='Report_Frame'>Chest_Tube_Removal</a></li>
+                    <li><a href='Templates/0000183.html' target='Report_Frame'>Feeding_Tube_Placement</a></li>
+                    <li><a href='Templates/0000250.html' target='Report_Frame'>Forearm_Xray</a></li>
+                    <li><a href='Templates/0000260.html' target='Report_Frame'>Thoracic_Spine</a></li>
+                    <li><a href='Templates/0000263.html' target='Report_Frame'>Paranasal_Sinuses</a></li>
+                    <li><a href='Templates/0000269.html' target='Report_Frame'>Gastrostomy_Tube_Exchange</a></li>
+                    <li><a href='Templates/0000270.html' target='Report_Frame'>Nasogastric_Tube_Placement</a></li>
+                    <li><a href='Templates/0000278.html' target='Report_Frame'>Bilateral_Wrist_Xray</a></li>
+                    <li><a href='Templates/0000280.html' target='Report_Frame'>Right_Wrist_Xray</a></li>
+
+                </ul>
+                <ul id="subContrast" class="subMenu">
+                    <li><a href='Templates/0000105.html' target='Report_Frame'>Esophagram</a></li>
+                    <li><a href='Templates/0000107.html' target='Report_Frame'>Neonatal_Enema</a></li>
+                    <li><a href='Templates/0000108.html' target='Report_Frame'>Peds_Swallow</a></li>
+                    <li><a href='Templates/0000109.html' target='Report_Frame'>Peds_Upper_GI</a></li>
+                    <li><a href='Templates/0000110.html' target='Report_Frame'>Peds_VCUG</a></li>
+                    <li><a href='Templates/0000184.html' target='Report_Frame'>Hysterosalpingogram</a></li>
+                    <li><a href='Templates/0000222.html' target='Report_Frame'>Cystogram</a></li>
+                    <li><a href='Templates/0000251.html' target='Report_Frame'>Defecography</a></li>
+                    <li><a href='Templates/0000252.html' target='Report_Frame'>Endoscopic_Retrograde_Cholangiopancreaticogram_(ERCP)</a></li>
+                    <li><a href='Templates/0000253.html' target='Report_Frame'>EndáRetáCholaná(ERC)</a></li>
+                    <li><a href='Templates/0000254.html' target='Report_Frame'>Endoscopic_Retrograde_Pancreaticogram_(ERP)</a></li>
+                    <li><a href='Templates/0000256.html' target='Report_Frame'>Gastrostomy_Tube_Removal</a></li>
+                    <li><a href='Templates/0000257.html' target='Report_Frame'>Therapeutic_Hip_Injection</a></li>
+
+                </ul>
+                <ul id="subUs" class="subMenu">
+                    <li><a href='Templates/0000089.html' target='Report_Frame'>US_Peds_Pylorus</a></li>
+                    <li><a href='Templates/0000090.html' target='Report_Frame'>US_Peds_Renal</a></li>
+                    <li><a href='Templates/0000091.html' target='Report_Frame'>US_Peds_Renal_Doppler</a></li>
+                    <li><a href='Templates/0000092.html' target='Report_Frame'>US_Pelvis</a></li>
+                    <li><a href='Templates/0000093.html' target='Report_Frame'>US_Retroperitoneum</a></li>
+                    <li><a href='Templates/0000094.html' target='Report_Frame'>US_Scrotum</a></li>
+                    <li><a href='Templates/0000095.html' target='Report_Frame'>US_Thoracentesis</a></li>
+                    <li><a href='Templates/0000098.html' target='Report_Frame'>US_TIPS</a></li>
+                    <li><a href='Templates/0000191.html' target='Report_Frame'>US_Bilateral_Upper_Extremity</a></li>
+                    <li><a href='Templates/0000192.html' target='Report_Frame'>US_Bladder</a></li>
+                    <li><a href='Templates/0000194.html' target='Report_Frame'>US_Right_Upper_Extremity</a></li>
+                    <li><a href='Templates/0000195.html' target='Report_Frame'>US_Thyroid</a></li>
+                    <li><a href='Templates/0000196.html' target='Report_Frame'>US_Thyroid_FNA</a></li>
+                    <li><a href='Templates/0000271.html' target='Report_Frame'>US_Abdomen_RUQ</a></li>
+                    <li><a href='Templates/0000272.html' target='Report_Frame'>US_Abdominal_Aorta</a></li>
+                    <li><a href='Templates/0000273.html' target='Report_Frame'>US_Bilateral_Lower_Extremity</a></li>
+                    <li><a href='Templates/0000274.html' target='Report_Frame'>US_Carotid_Arteries</a></li>
+                    <li><a href='Templates/0000275.html' target='Report_Frame'>US_Left_Lower_Extremity</a></li>
+                    <li><a href='Templates/0000276.html' target='Report_Frame'>US_Paracentesis</a></li>
+                    <li><a href='Templates/0000277.html' target='Report_Frame'>US_Right_Lower_Extremity</a></li>
+                    <li><a href='Templates/0000282.html' target='Report_Frame'>US_Bladder_(with_Volume_Calculator)</a></li>
+                    <li><a href='Templates/0000283.html' target='Report_Frame'>US_Carotid_Arteries_(with_Stenosis_Calculator)</a></li>
+                    <li><a href='Templates/0000287.html' target='Report_Frame'>US_Kidney_Biopsy_Guidance</a></li>
+                    <li><a href='Templates/0000288.html' target='Report_Frame'>US_Liver_Biopsy</a></li>
+                    <li><a href='Templates/0000298.html' target='Report_Frame'>US_Early_Pregnancy</a></li>
+
+                </ul>
+                <ul>
+                </ul>
+            </div>
+
+
+            <div id="frameDiv">
+                <iframe id="reportFrame" name="Report_Frame" src="Templates/0000001.html">
+                </iframe>
+            </div>
+
+            <div id="rightBar">
+                <ul>
+                    <li><span id="newButton">New</span></li>
+                    <li><span id="resetButton">Reset</span></li>
+                    <li><span id="archiveButton">Archive</span></li>
+                    <li>--------------</li>
+                    <!--<li id="print"><a href="print.html">Print</a></li>-->
+                    <li><span id="printButton">Print</span></li>
+                    <li>--------------</li>
+                    <li><span id="closeButton">Close</span></li>
+                </ul>
+            </div>
+        </div>
+        <footer>
+            <p>&#169; AUAsoft 2016</p>
+        </footer>
+        <datalist id="countryList">
+            <option>Afghanistan</option>
+            <option>Akrotiri</option>
+            <option>Albania</option>
+            <option>Algeria</option>
+            <option>American Samoa</option>
+            <option>Andorra</option>
+            <option>Angola</option>
+            <option>Anguilla</option>
+            <option>Antarctica</option>
+            <option>Antigua and Barbuda</option>
+            <option>Argentina</option>
+            <option>Armenia</option>
+            <option>Aruba</option>
+            <option>Ashmore and Cartier Islands</option>
+            <option>Australia</option>
+            <option>Austria</option>
+            <option>Azerbaijan</option>
+            <option>Bahamas, The</option>
+            <option>Bahrain</option>
+            <option>Bangladesh</option>
+            <option>Barbados</option>
+            <option>Bassas da India</option>
+            <option>Belarus</option>
+            <option>Belgium</option>
+            <option>Belize</option>
+            <option>Benin</option>
+            <option>Bermuda</option>
+            <option>Bhutan</option>
+            <option>Bolivia</option>
+            <option>Bosnia and Herzegovina</option>
+            <option>Botswana</option>
+            <option>Bouvet Island</option>
+            <option>Brazil</option>
+            <option>British Indian Ocean Territory</option>
+            <option>British Virgin Islands</option>
+            <option>Brunei</option>
+            <option>Bulgaria</option>
+            <option>Burkina Faso</option>
+            <option>Burma</option>
+            <option>Burundi</option>
+            <option>Cambodia</option>
+            <option>Cameroon</option>
+            <option>Canada</option>
+            <option>Cape Verde</option>
+            <option>Cayman Islands</option>
+            <option>Central African Republic</option>
+            <option>Chad</option>
+            <option>Chile</option>
+            <option>China</option>
+            <option>Christmas Island</option>
+            <option>Clipperton Island</option>
+            <option>Cocos (Keeling) Islands</option>
+            <option>Colombia</option>
+            <option>Comoros</option>
+            <option>Congo, Democratic Republic of the</option>
+            <option>Congo, Republic of the</option>
+            <option>Cook Islands</option>
+            <option>Coral Sea Islands</option>
+            <option>Costa Rica</option>
+            <option>Cote d'Ivoire</option>
+            <option>Croatia</option>
+            <option>Cuba</option>
+            <option>Cyprus</option>
+            <option>Czech Republic</option>
+            <option>Denmark</option>
+            <option>Dhekelia</option>
+            <option>Djibouti</option>
+            <option>Dominica</option>
+            <option>Dominican Republic</option>
+            <option>Ecuador</option>
+            <option>Egypt</option>
+            <option>El Salvador</option>
+            <option>Equatorial Guinea</option>
+            <option>Eritrea</option>
+            <option>Estonia</option>
+            <option>Ethiopia</option>
+            <option>Europa Island</option>
+            <option>Falkland Islands (Islas Malvinas)</option>
+            <option>Faroe Islands</option>
+            <option>Fiji</option>
+            <option>Finland</option>
+            <option>France</option>
+            <option>French Guiana</option>
+            <option>French Polynesia</option>
+            <option>French Southern and Antarctic Lands</option>
+            <option>Gabon</option>
+            <option>Gambia, The</option>
+            <option>Gaza Strip</option>
+            <option>Georgia</option>
+            <option>Germany</option>
+            <option>Ghana</option>
+            <option>Gibraltar</option>
+            <option>Glorioso Islands</option>
+            <option>Greece</option>
+            <option>Greenland</option>
+            <option>Grenada</option>
+            <option>Guadeloupe</option>
+            <option>Guam</option>
+            <option>Guatemala</option>
+            <option>Guernsey</option>
+            <option>Guinea</option>
+            <option>Guinea-Bissau</option>
+            <option>Guyana</option>
+            <option>Haiti</option>
+            <option>Heard Island and McDonald Islands</option>
+            <option>Holy See (Vatican City)</option>
+            <option>Honduras</option>
+            <option>Hong Kong</option>
+            <option>Hungary</option>
+            <option>Iceland</option>
+            <option>India</option>
+            <option>Indonesia</option>
+            <option>Iran</option>
+            <option>Iraq</option>
+            <option>Ireland</option>
+            <option>Isle of Man</option>
+            <option>Israel</option>
+            <option>Italy</option>
+            <option>Jamaica</option>
+            <option>Jan Mayen</option>
+            <option>Japan</option>
+            <option>Jersey</option>
+            <option>Jordan</option>
+            <option>Juan de Nova Island</option>
+            <option>Kazakhstan</option>
+            <option>Kenya</option>
+            <option>Kiribati</option>
+            <option>Korea, North</option>
+            <option>Korea, South</option>
+            <option>Kuwait</option>
+            <option>Kyrgyzstan</option>
+            <option>Laos</option>
+            <option>Latvia</option>
+            <option>Lebanon</option>
+            <option>Lesotho</option>
+            <option>Liberia</option>
+            <option>Libya</option>
+            <option>Liechtenstein</option>
+            <option>Lithuania</option>
+            <option>Luxembourg</option>
+            <option>Macau</option>
+            <option>Macedonia</option>
+            <option>Madagascar</option>
+            <option>Malawi</option>
+            <option>Malaysia</option>
+            <option>Maldives</option>
+            <option>Mali</option>
+            <option>Malta</option>
+            <option>Marshall Islands</option>
+            <option>Martinique</option>
+            <option>Mauritania</option>
+            <option>Mauritius</option>
+            <option>Mayotte</option>
+            <option>Mexico</option>
+            <option>Micronesia, Federated States of</option>
+            <option>Moldova</option>
+            <option>Monaco</option>
+            <option>Mongolia</option>
+            <option>Montserrat</option>
+            <option>Morocco</option>
+            <option>Mozambique</option>
+            <option>Namibia</option>
+            <option>Nauru</option>
+            <option>Navassa Island</option>
+            <option>Nepal</option>
+            <option>Netherlands</option>
+            <option>Netherlands Antilles</option>
+            <option>New Caledonia</option>
+            <option>New Zealand</option>
+            <option>Nicaragua</option>
+            <option>Niger</option>
+            <option>Nigeria</option>
+            <option>Niue</option>
+            <option>Norfolk Island</option>
+            <option>Northern Mariana Islands</option>
+            <option>Norway</option>
+            <option>Oman</option>
+            <option>Pakistan</option>
+            <option>Palau</option>
+            <option>Panama</option>
+            <option>Papua New Guinea</option>
+            <option>Paracel Islands</option>
+            <option>Paraguay</option>
+            <option>Peru</option>
+            <option>Philippines</option>
+            <option>Pitcairn Islands</option>
+            <option>Poland</option>
+            <option>Portugal</option>
+            <option>Puerto Rico</option>
+            <option>Qatar</option>
+            <option>Reunion</option>
+            <option>Romania</option>
+            <option>Russia</option>
+            <option>Rwanda</option>
+            <option>Saint Helena</option>
+            <option>Saint Kitts and Nevis</option>
+            <option>Saint Lucia</option>
+            <option>Saint Pierre and Miquelon</option>
+            <option>Saint Vincent and the Grenadines</option>
+            <option>Samoa</option>
+            <option>San Marino</option>
+            <option>Sao Tome and Principe</option>
+            <option>Saudi Arabia</option>
+            <option>Senegal</option>
+            <option>Serbia and Montenegro</option>
+            <option>Seychelles</option>
+            <option>Sierra Leone</option>
+            <option>Singapore</option>
+            <option>Slovakia</option>
+            <option>Slovenia</option>
+            <option>Solomon Islands</option>
+            <option>Somalia</option>
+            <option>South Africa</option>
+            <option>South Georgia and the South Sandwich Islands</option>
+            <option>Spain</option>
+            <option>Spratly Islands</option>
+            <option>Sri Lanka</option>
+            <option>Sudan</option>
+            <option>Suriname</option>
+            <option>Svalbard</option>
+            <option>Swaziland</option>
+            <option>Sweden</option>
+            <option>Switzerland</option>
+            <option>Syria</option>
+            <option>Taiwan</option>
+            <option>Tajikistan</option>
+            <option>Tanzania</option>
+            <option>Thailand</option>
+            <option>Timor-Leste</option>
+            <option>Togo</option>
+            <option>Tokelau</option>
+            <option>Tonga</option>
+            <option>Trinidad and Tobago</option>
+            <option>Tromelin Island</option>
+            <option>Tunisia</option>
+            <option>Turkey</option>
+            <option>Turkmenistan</option>
+            <option>Turks and Caicos Islands</option>
+            <option>Tuvalu</option>
+            <option>Uganda</option>
+            <option>Ukraine</option>
+            <option>United Arab Emirates</option>
+            <option>United Kingdom</option>
+            <option>United States</option>
+            <option>Uruguay</option>
+            <option>Uzbekistan</option>
+            <option>Vanuatu</option>
+            <option>Venezuela</option>
+            <option>Vietnam</option>
+            <option>Virgin Islands</option>
+            <option>Wake Island</option>
+            <option>Wallis and Futuna</option>
+            <option>West Bank</option>
+            <option>Western Sahara</option>
+            <option>Yemen</option>
+            <option>Zambia</option>
+            <option>Zimbabwe</option>
+        </datalist>
+    </div>
+</AuthorizeView>
+
+@code {
+
+    <script src="js/functions.js"></script>
+    <script src="js/jquery-1.12.3.js"></script>
+    <script src="js/accessdb.js"></script>
+
+    <script>
+        ////////////jQuery//////////////////
+        $(document).ready(function () {
+            //console.log("document is ready")
+            $(".subMenu").hide();
+            $("#popUp").hide();
+            $(".menuItem").click(function (event) {
+                console.log("menuItem clicked:" + this)
+                var ele = event.target;
+                var eleCoordin = $(ele).offset();
+                var eleWidth = $(ele).width();
+                var eleHeight = $(ele).height();
+                console.log(ele + "//" + eleCoordin + "//" + eleWidth + "//" + eleHeight)
+                newVal = new Object();
+                newVal.top = eleCoordin.top;
+                newVal.left = eleCoordin.left + eleWidth;
+                console.log(newVal + "//" + newVal.left + "//" + newVal.top);
+                $("#popUp").offset(newVal);
+
+                //$("#popUp").hide();
+                $(".subMenu").hide();
+                var flag = "#sub" + $(this).attr("id");
+                console.log(flag);
+                $("#popUp").show();
+                $(flag).show();
+            });
+            $(".subMenu").find("li").click(function () {
+                console.log("list item clicked:" + this)
+                //$(".subMenu").hide();
+                $("#popUp").hide();
+
+            });
+            $("#printButton").click(function () { printPage(); });
+            $("#closeButton").click(function () { closeWindow(); });
+            $("#newButton").click(function () { newPatient(); });
+            $("#resetButton").click(function () { resetReport(); });
+            $("#archiveButton").click(function () { archive(); });
+            $("#moreButton").click(function function_name() {
+                // body...
+                $("#infoPanel").slideToggle();
+                if (this.text() == "more") this.text("less");
+                else this.text("more");
+            });
+        });
+        //////////////
+        function pageLoad() {
+            //document.getELementById("hn").innerHTML = localStorage.hospitalName;
+            //document.getELementById("hn").innerHTML = "hahhaoooo";
+            showHeaderInfo();
+        }
+    </script>
+
+
+
+}
